@@ -1,0 +1,111 @@
+version: "3.4"
+services:
+    db:
+        image: postgres:15.2-alpine
+        environment:
+            POSTGRES_USER: sentra_user
+            POSTGRES_PASSWORD: huni5504
+            POSTGRES_DB: Sentra_DB
+            POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+        ports:
+            - 5433:5433
+        volumes:
+            - ./db/data:/var/lib/postgresql/data
+        command: 
+            postgres -c port=5433
+
+    pgadmin:
+        image: dpage/pgadmin4
+        user: root
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "admin@sentra.co.kr"
+            PGADMIN_DEFAULT_PASSWORD: "huni5504"
+        ports:
+            - 3030:80
+        volumes:
+            - ./pgadmin/data:/var/lib/pgadmin
+        depends_on:
+            - db
+
+#     redis:
+#         image: redis:7-alpine
+#         ports:
+#             - 6379:6379
+#         volumes:
+#             - redis_data:/data
+    
+#     openwisp_dashboard:
+#         image: openwisp/openwisp-dashboard:latest
+#         restart: always
+#         build:
+#             context: images
+#             dockerfile: openwisp_dashboard/Dockerfile
+#             args:
+#                 DASHBOARD_APP_PORT: 8000
+#         environment:
+#             API_DOMAIN: localhost
+#             DASHBOARD_DOMAIN: localhost
+#             SSL_CERT_MODE: self-signed 
+#             DJANGO_SUPERUSER_USERNAME: admin
+#             DJANGO_SUPERUSER_PASSWORD: admin1234
+#             DJANGO_SUPERUSER_EMAIL: admin@sentra.co.kr
+#             POSTGRES_DB: Sentra_DB
+#             POSTGRES_USER: sentra_user
+#             POSTGRES_PASSWORD: huni5504
+#             POSTGRES_HOST: db  
+#             POSTGRES_PORT: 5433
+#             REDIS_HOST: redis
+#             TZ: Asia/Seoul
+#         ports: 
+#             - 8010:8000
+#         depends_on:
+#             - db
+#             - redis
+#     api:
+#         image: openwisp/openwisp-api:latest
+#         restart: unless-stopped
+#         environment:
+#             POSTGRES_DB: Sentra_DB
+#             POSTGRES_USER: sentra_user
+#             POSTGRES_PASSWORD: huni5504
+#             POSTGRES_HOST: db
+#             POSTGRES_PORT: 5433
+#             REDIS_HOST: redis
+#         depends_on:
+#             - db
+#             - redis
+#             - openwisp_dashboard
+    
+#     celery:
+#         image: openwisp/openwisp-dashboard:latest
+#         restart: unless-stopped
+#         environment:
+#             MODULE_NAME: celery
+#             POSTGRES_HOST: db
+#             POSTGRES_PORT: 5433
+#             POSTGRES_DB: Sentra_DB
+#             POSTGRES_USER: sentra_user
+#             POSTGRES_PASSWORD: huni5504
+#             REDIS_HOST: redis
+#         depends_on:
+#             - db
+#             - redis
+#             - openwisp_dashboard
+#     celerybeat:
+#         image: openwisp/openwisp-dashboard:latest
+#         restart: unless-stopped
+#         environment:
+#             MODULE_NAME: celerybeat
+#             POSTGRES_HOST: db
+#             POSTGRES_PORT: 5433
+#             POSTGRES_DB: Sentra_DB
+#             POSTGRES_USER: sentra_user
+#             POSTGRES_PASSWORD: huni5504
+#             REDIS_HOST: redis
+#         depends_on:
+#             - db
+#             - redis
+#             - openwisp_dashboard
+
+# volumes:
+#     redis_data: {}

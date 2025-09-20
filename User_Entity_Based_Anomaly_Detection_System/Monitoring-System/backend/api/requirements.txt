@@ -1,0 +1,37 @@
+# 필수 기반
+fastapi==0.103.1
+uvicorn==0.23.2
+gunicorn==21.0.1
+python-dotenv==1.0.0
+
+# DB
+SQLAlchemy==2.0.36
+psycopg2-binary==2.9.7
+
+# 인증
+fastapi-jwt-auth==0.5.0
+bcrypt==4.0.1
+passlib==1.7.4
+PyJWT==1.7.1
+
+# 비동기 작업
+celery==5.3.4
+flower==2.0.1
+
+# 데이터 처리
+pandas==2.2.3
+numpy==2.2.2
+orjson==3.9.7
+
+# 머신 러닝
+scikit-learn==1.5.2
+imbalanced-learn==0.12.3
+joblib==1.4.2
+
+# 네트워크 접근 제어를 위한 SSH 라이브러리
+paramiko==4.0.0
+
+# 기타
+httpx==0.25.0
+email-validator==2.0.0.post2
+python-multipart==0.0.6

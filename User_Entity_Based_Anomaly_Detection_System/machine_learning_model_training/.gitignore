@@ -1,0 +1,17 @@
+__pycache__
+__answers__
+DataByWeek
+ExtractedData
+LDAP
+NumDataByWeek
+tmp
+*.csv
+*.pickle
+*.Identifier
+license.*
+
+scenarios.txt
+
+*.joblib
+
+readme.txt
